@@ -1,4 +1,4 @@
-package calculadora.engenhariaeconômica.univasf.edu;
+package edu.univasf.engenhariaeconômica.calculadora;
 
 public abstract class Juros {
 	private double valorPresente;	//	VP ou C (Capital)

@@ -1,6 +1,6 @@
-package calculadora.engenhariaeconômica.univasf.edu;
+package edu.univasf.engenhariaeconômica.calculadora;
 
-public class Aposentadoria {
+public class Aposentadoria {	//
 	int idadeAtual;
 	int idadeAposentadoria;
 	int idadeFinal;

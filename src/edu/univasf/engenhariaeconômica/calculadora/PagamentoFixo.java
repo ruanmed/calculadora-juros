@@ -1,4 +1,4 @@
-package calculadora.engenhariaeconômica.univasf.edu;
+package edu.univasf.engenhariaeconômica.calculadora;
 
 public class PagamentoFixo extends JurosCompostos {
 	double valorPagamentoPeriódico;	//PGTO
