@@ -56,15 +56,30 @@ public class Aposentadoria {	//
 		double tempoAntes = Math.abs((getIdadeAposentadoria() - getIdadeAtual())*12);
 		double tempoDepois= Math.abs((getIdadeFinal() - getIdadeAposentadoria())*12);
 
-		antes = new PagamentoFixo(0,0,0,getInflação(),tempoDepois,getRendaDesejada());
+		depois = new PagamentoFixo(0,0,0,getInflação(),tempoDepois,getRendaDesejada());
+
+		System.out.println("\nDEPOIS " + depois.toString());
 		
-		depois = new PagamentoFixo(0,antes.getPagamentoPeriódico(),0,getInflação(),tempoAntes,0);
+		antes = new PagamentoFixo(0,depois.getValorPresente(),0,getInflação(),tempoAntes,0);
+		
+		System.out.println("\nANTES " + antes.toString());
 	}
 	
+	public String toString() {
+		return new String(
+				"\nIdade Atual: " + getIdadeAtual() +
+				"\nIdade Aposentadoria: " + getIdadeAposentadoria() +
+				"\nIdade Final: " + getIdadeFinal() +
+				"\nRenda Desejada :" + getRendaDesejada() +
+				"\nInflação: " + getInflação() +
+				"\nPagamento Necessário: " + antes.getPagamentoPeriódico() );
+	}
 	
-	public static int main() {
+	public static void main(String[] args) {
+		Aposentadoria nova = new Aposentadoria(22,40,85,3083,0.003);
+		nova.calcularAposentadoria();
 		
-		System.out.println("at");
-		return 0;
+		System.out.println(nova.toString());
+		
 	}
 }

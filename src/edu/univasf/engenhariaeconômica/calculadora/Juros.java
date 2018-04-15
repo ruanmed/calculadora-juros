@@ -16,7 +16,7 @@ public abstract class Juros {
 		setNúmeroParcelas(n);
 		
 		calcularValorPresente();
-		calcularNúmeroParcelas();
+		calcularValorFuturo();
 		calcularValorJuros();
 		calcularTaxaJuros();
 		calcularNúmeroParcelas();
@@ -51,7 +51,15 @@ public abstract class Juros {
 	void setNúmeroParcelas(double novoNúmeroParcelas) {
 		númeroParcelas = novoNúmeroParcelas;
 	}
-	
+	@Override
+	public String toString() {
+		return new String(
+				"\nValor Presente: " + getValorPresente() +
+				"\nValor Futuro: " + getValorFuturo() +
+				"\nValor Juros: " + getValorJuros() +
+				"\nTaxa de Juros: " + getTaxaJuros() +
+				"\nNúmero de Parcelas: " + getNúmeroParcelas() );
+	}
 	public abstract void calcularValorPresente();
 	public abstract void calcularValorFuturo();
 	public abstract void calcularValorJuros();
