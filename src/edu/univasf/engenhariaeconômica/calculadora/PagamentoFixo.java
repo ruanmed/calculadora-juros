@@ -29,29 +29,31 @@ public class PagamentoFixo extends JurosCompostos {
 	}
 	
 	public void calcularPagamentoPeriódico() { // VF = PGTO*(((1+i)^n - 1)/i)
-		double novoPagamentoPeriódico = 0;
-		if (getTaxaJuros() > 0 && getNúmeroParcelas() > 0) {
-			if (getValorFuturo() > 0) { // PGTO = (VF*i)/((1+i)^n - 1)
-				novoPagamentoPeriódico = (getValorFuturo() * getTaxaJuros()) / 
-						((Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1));
+		if (getPagamentoPeriódico() <= 0) {
+			double novoPagamentoPeriódico = 0;
+			if (getTaxaJuros() > 0 && getNúmeroParcelas() > 0) {
+				if (getValorFuturo() > 0) { // PGTO = (VF*i)/((1+i)^n - 1)
+					novoPagamentoPeriódico = (getValorFuturo() * getTaxaJuros()) / 
+							((Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1));
+				}
+				else if (getValorPresente() > 0) { // PGTO == VP * [ i*(1+i)^n / ( (1+i)^n - 1) ] 
+					novoPagamentoPeriódico = getValorPresente() * ( ( getTaxaJuros()*Math.pow(1 + getTaxaJuros(), getNúmeroParcelas()) ) /
+							(Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1 )) ;
+				}
 			}
-			else if (getValorPresente() > 0) { // PGTO == VP * [ i*(1+i)^n / ( (1+i)^n - 1) ] 
-				novoPagamentoPeriódico = getValorPresente() * ( ( getTaxaJuros()*Math.pow(1 + getTaxaJuros(), getNúmeroParcelas()) ) /
-						(Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1 )) ;
-			}
-		}
-		if (novoPagamentoPeriódico > 0)
 			setPagamentoPeriódico(novoPagamentoPeriódico);
+		}
 	}
 	
 	public void calcularValorPresente() {	// VP = PGTO/ [ i*(1+i)^n /  ( (1+i)^n - 1) ]
 		// TODO Auto-generated method stub
-		super.calcularValorPresente();
+		//super.calcularValorPresente();
 		if (getValorPresente() <= 0) {
 			double novoValorPresente = 0;
 			if (getTaxaJuros() > 0 && getNúmeroParcelas() > 0 && getPagamentoPeriódico() > 0) {	// VP = PGTO/ [ i*(1+i)^n /  ( (1+i)^n - 1) ]
-				novoValorPresente = getPagamentoPeriódico()/(( getTaxaJuros()*Math.pow(1 + getTaxaJuros(), getNúmeroParcelas()) ) /
-						(Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1 ));
+				novoValorPresente = getPagamentoPeriódico()*( (Math.pow(1+getTaxaJuros(), getNúmeroParcelas()) - 1 ) /
+						( getTaxaJuros()*Math.pow(1 + getTaxaJuros(), getNúmeroParcelas()) ) 
+						);
 			}
 			setValorPresente(novoValorPresente);
 		}

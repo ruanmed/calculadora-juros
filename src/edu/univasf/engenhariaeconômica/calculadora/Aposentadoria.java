@@ -72,11 +72,12 @@ public class Aposentadoria {	//
 				"\nIdade Final: " + getIdadeFinal() +
 				"\nRenda Desejada :" + getRendaDesejada() +
 				"\nInflação: " + getInflação() +
-				"\nPagamento Necessário: " + antes.getPagamentoPeriódico() );
+				"\nPagamento Necessário: " + antes.getPagamentoPeriódico() +
+				"\nPagamento Posterior: " + depois.getPagamentoPeriódico() );
 	}
 	
 	public static void main(String[] args) {
-		Aposentadoria nova = new Aposentadoria(22,40,85,3083,0.003);
+		Aposentadoria nova = new Aposentadoria(22,60,85,1200,0.003);
 		nova.calcularAposentadoria();
 		
 		System.out.println(nova.toString());
