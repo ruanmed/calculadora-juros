@@ -1,4 +1,5 @@
 package edu.univasf.engenhariaeconômica.calculadora;
+import java.lang.Math;
 
 public class JurosCompostos extends Juros {
 //	VF = VP*(1+i)^n
