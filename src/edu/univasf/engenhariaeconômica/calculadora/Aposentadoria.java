@@ -20,6 +20,7 @@ public class Aposentadoria {	//
 		setRendaDesejada(renda);
 		setInflação(inf);
 		setPagamentoNecessário(pgto);
+		calcularAposentadoria();
 	}
 	
 	

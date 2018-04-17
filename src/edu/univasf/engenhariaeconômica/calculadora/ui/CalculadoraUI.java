@@ -183,7 +183,7 @@ public class CalculadoraUI {
 	    NumberFormat format1 = NumberFormat.getInstance();
 	    NumberFormatter formatoIdade = new NumberFormatter(format1);
 	    formatoIdade.setValueClass(Integer.class);
-	    formatoIdade.setMinimum(1);
+	    formatoIdade.setMinimum(0);
 	    formatoIdade.setMaximum(150);
 	    formatoIdade.setAllowsInvalid(false);
 	    // If you want the value to be committed on each keystroke instead of focus lost
@@ -205,11 +205,11 @@ public class CalculadoraUI {
 	    //MaskFormatter formatoPorcento = createFormatter("#####.###");
 	    
 	    NumberFormat format3 = NumberFormat.getInstance();
-	    format3.setMaximumFractionDigits(2);
+	    format3.setMaximumFractionDigits(5);
 	    format3.setMinimumFractionDigits(2);
 	    NumberFormatter formatoDinheiro = new NumberFormatter(format3);
 	    formatoDinheiro.setValueClass(Double.class);
-	    formatoDinheiro.setMinimum(0.01);
+	    formatoDinheiro.setMinimum(0.00);
 	    //formatoDinheiro.setMaximum(300000.00);
 	    formatoDinheiro.setAllowsInvalid(false);
 	    // If you want the value to be committed on each keystroke instead of focus lost
@@ -258,6 +258,13 @@ public class CalculadoraUI {
 //		JTextField campoPagamentoPosterior = new JFormattedTextField(formatter);
 //		campoPagamentoPosterior.setBounds(x, y+h, w, h);
 
+		campoIdadeAtual.setValue(0);
+		campoIdadeAposentadoria.setValue(0);
+		campoIdadeFinal.setValue(0);
+		campoRendaDesejada.setValue(0.0);
+		campoInflação.setValue(0.0);
+		campoPagamentoNecessário.setValue(0.0);
+				
 		painelAposentadoria.setLayout(null); 
 		painelAposentadoria.add(rotulo1);
 		painelAposentadoria.add(campoIdadeAtual);
