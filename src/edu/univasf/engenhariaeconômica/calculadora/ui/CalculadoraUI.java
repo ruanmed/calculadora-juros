@@ -135,7 +135,7 @@ public class CalculadoraUI {
 	}
 	private void preparaJanela() {
 		// TODO Auto-generated method stub
-		janela = new JFrame("Calculadora");
+		janela = new JFrame("Calculadora - Engenharia Econômica - Ruan Bahia");
 	    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   
 	    rotuloCabecalho = new JLabel("",JLabel.CENTER); 
