@@ -15,25 +15,29 @@ public abstract class Juros {
 		setTaxaJuros(i);
 		setNúmeroParcelas(n);
 		
+		calcularZeros();	
+	}
+	public void calcularZeros() {
+		// TODO Auto-generated method stub
 		calcularValorPresente();
 		calcularValorFuturo();
 		calcularValorJuros();
 		calcularTaxaJuros();
 		calcularNúmeroParcelas();
 	}
-	double getValorPresente() {
+	public double getValorPresente() {
 		return valorPresente;
 	}
-	double getValorFuturo() {
+	public double getValorFuturo() {
 		return valorFuturo;
 	}
-	double getValorJuros() {
+	public double getValorJuros() {
 		return valorJuros;
 	}
-	double getTaxaJuros() {
+	public double getTaxaJuros() {
 		return taxaJuros;
 	}
-	double getNúmeroParcelas() {
+	public double getNúmeroParcelas() {
 		return númeroParcelas;
 	}
 	void setValorPresente(double novoValorPresente) {

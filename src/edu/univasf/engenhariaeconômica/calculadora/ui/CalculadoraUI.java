@@ -9,7 +9,8 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
-import edu.univasf.engenhariaeconômica.calculadora.Aposentadoria;  
+import edu.univasf.engenhariaeconômica.calculadora.Aposentadoria;
+import edu.univasf.engenhariaeconômica.calculadora.PagamentoFixo;  
 
 public class CalculadoraUI {
 	private JFrame janela;
@@ -53,9 +54,9 @@ public class CalculadoraUI {
 		final JMenuBar menuBar = new JMenuBar();
 
 		//create menus
-		JMenu menuSelecionar = new JMenu("Selecionar Calculadora");
+		//JMenu menuSelecionar = new JMenu("Selecionar Calculadora");
 		final JMenu menuAjuda = new JMenu("Ajuda");
-		menuSelecionar.setMnemonic(KeyEvent.VK_S);
+		//menuSelecionar.setMnemonic(KeyEvent.VK_S);
 		menuAjuda.setMnemonic(KeyEvent.VK_A);
 		
 		JMenuItem menuAjudaSobre = new JMenuItem("Sobre");
@@ -105,52 +106,23 @@ public class CalculadoraUI {
 		menuSelecionarJurosCompostos.addActionListener(menuItemListener);
 		exitMenuItem.addActionListener(menuItemListener);
 
-//		final JCheckBoxMenuItem showWindowMenu = new JCheckBoxMenuItem("Show About", true);
-//		showWindowMenu.addItemListener(new ItemListener() {
-//			public void itemStateChanged(ItemEvent e) {
-//				if (showWindowMenu.getState()) {
-//					menuBar.add(menuAjuda);
-//				} else {
-//					menuBar.remove(menuAjuda);
-//				}
-//			}
-//		});
-//		final JRadioButtonMenuItem showLinksMenu = new JRadioButtonMenuItem(
-//				"Show Links", true);
-//		showLinksMenu.addItemListener(new ItemListener() {
-//			public void itemStateChanged(ItemEvent e) {
-//
-//				if(menuBar.getMenu(3)!= null){
-//					menuBar.remove(linkMenu);
-//					janela.repaint();
-//				} else {                   
-//					menuBar.add(linkMenu);
-//					janela.repaint();
-//				}
-//			}
-//		});
-
 		//add menu items to menus
 		
 		menuAjuda.add(menuAjudaSobre);
 		
 		
-		menuSelecionar.add(menuSelecionarAposentadoria);
-		menuSelecionar.add(menuSelecionarPrestações);
-		menuSelecionar.add(menuSelecionarAmortização);
-		menuSelecionar.addSeparator();
-		menuSelecionar.add(menuSelecionarJurosSimples);
-		menuSelecionar.add(menuSelecionarJurosCompostos);
+//		menuSelecionar.add(menuSelecionarAposentadoria);
+//		menuSelecionar.add(menuSelecionarPrestações);
+//		menuSelecionar.add(menuSelecionarAmortização);
 //		menuSelecionar.addSeparator();
-//		menuSelecionar.add(showWindowMenu);
+//		menuSelecionar.add(menuSelecionarJurosSimples);
+//		menuSelecionar.add(menuSelecionarJurosCompostos);     
 //		menuSelecionar.addSeparator();
-//		menuSelecionar.add(showLinksMenu);       
-		menuSelecionar.addSeparator();
-		menuSelecionar.add(exitMenuItem);        
+//		menuSelecionar.add(exitMenuItem);        
 
 
 		//add menu to menubar
-		menuBar.add(menuSelecionar);
+//		menuBar.add(menuSelecionar);
 		menuBar.add(menuAjuda);     
 
 		//add menubar to the frame
@@ -216,11 +188,6 @@ public class CalculadoraUI {
 	    formatoDinheiro.setCommitsOnValidEdit(true);
 	    //MaskFormatter formatoDinheiro = createFormatter("########.###");
 
-	   // JOptionPane.showMessageDialog(null, field);
-
-	    // getValue() always returns something valid
-	 //   System.out.println(field.getValue());
-		
 		
 		int x =10, y =30, w = 150, h =20;
 		JLabel rotulo1 = new JLabel("Idade Atual"); 
@@ -284,20 +251,8 @@ public class CalculadoraUI {
 
 		JButton botãoCalcular = new JButton("Calcular");
 		botãoCalcular.setBounds(x,(y+50),100,50);
-		campoIdadeFinal.addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
-					}
-				}
-		);
 		botãoCalcular.addActionListener(
 				new ActionListener() {
-					
-					//
-							
-					//		);
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Aposentadoria temp = new Aposentadoria(
@@ -318,19 +273,148 @@ public class CalculadoraUI {
 						campoInflação.setValue(temp.getInflação()*100.0);
 						campoPagamentoNecessário.setValue(temp.getPagamentoNecessário());
 						
-						//Number test = (Number)(Object)campoIdadeAtual.getText();
-						Double nume = (Double) campoRendaDesejada.getValue();
-						System.out.println("IMPRIMINDO: " + nume);
 						//System.exit(0);
 					}
 				}
 		);
 		painelAposentadoria.add(botãoCalcular);
 	}
+
 	private void preparaPainelPrestações() {
 		// TODO Auto-generated method stub
 		painelPrestações = new JPanel();
+		
+		JLabel tituloJanela = new JLabel("Calculadora de Prestações",JLabel.CENTER);
+		tituloJanela.setSize(500,100);
+		tituloJanela.setVerticalAlignment(JLabel.TOP);
+		painelPrestações.add(tituloJanela);
+		
+	    NumberFormat format1 = NumberFormat.getInstance();
+	    NumberFormatter formatoInteiro = new NumberFormatter(format1);
+	    formatoInteiro.setValueClass(Integer.class);
+	    formatoInteiro.setMinimum(0);
+	    formatoInteiro.setMaximum(Integer.MAX_VALUE);
+	    formatoInteiro.setAllowsInvalid(false);
+	    // If you want the value to be committed on each keystroke instead of focus lost
+	    formatoInteiro.setCommitsOnValidEdit(true);
+	    //JFormattedTextField field = new JFormattedTextField(formatter);
+	    //MaskFormatter formatoIdade = createFormatter("###");
+	  
+	    
+	    NumberFormat format2 = NumberFormat.getInstance();
+	    format2.setMaximumFractionDigits(7);
+	    format2.setMinimumFractionDigits(2);
+	    NumberFormatter formatoPorcento = new NumberFormatter(format2);
+	    formatoPorcento.setValueClass(Double.class);
+	    formatoPorcento.setMinimum(0.000);
+	    formatoPorcento.setMaximum(3000.00);
+	    formatoPorcento.setAllowsInvalid(false);
+	    // If you want the value to be committed on each keystroke instead of focus lost
+	    formatoPorcento.setCommitsOnValidEdit(true);
+	    //MaskFormatter formatoPorcento = createFormatter("#####.###");
+	    
+	    NumberFormat format3 = NumberFormat.getInstance();
+	    format3.setMaximumFractionDigits(2);
+	    format3.setMinimumFractionDigits(2);
+	    NumberFormatter formatoDinheiro = new NumberFormatter(format3);
+	    formatoDinheiro.setValueClass(Double.class);
+	    formatoDinheiro.setMinimum(0.00);
+	    //formatoDinheiro.setMaximum(300000.00);
+	    formatoDinheiro.setAllowsInvalid(false);
+	    // If you want the value to be committed on each keystroke instead of focus lost
+	    formatoDinheiro.setCommitsOnValidEdit(true);
+	    //MaskFormatter formatoDinheiro = createFormatter("########.###");
+
+		
+		int x =10, y =30, w = 150, h =20;
+		
+		JLabel rotulo1 = new JLabel("Valor do Produto R$"); 
+		rotulo1.setBounds(x, y, w, h);
+		JFormattedTextField campoValorProduto = new JFormattedTextField(formatoDinheiro);
+		campoValorProduto.setBounds(x, y+h, w, h);
+		
+		JLabel rotulo2 = new JLabel("Taxa de Juros % (a.m.)"); 
+		rotulo2.setBounds((x+=(w+20)), y, w, h);
+		JFormattedTextField campoTaxaJuros = new JFormattedTextField(formatoPorcento);
+		campoTaxaJuros.setBounds(x, y+h, w, h);
+		
+		JLabel rotulo3 = new JLabel("Parcelas (Número de meses)"); 
+		rotulo3.setBounds((x+=(w+20)), y, w, h);
+		JFormattedTextField campoParcelas = new JFormattedTextField(formatoInteiro);
+		campoParcelas.setBounds(x, y+h, w, h);
+
+		JLabel rotulo4 = new JLabel("Valor da Parcela R$"); 
+		rotulo4.setBounds((x-=(2*(w+20))), (y+=50), w, h);
+		JFormattedTextField campoValorParcela = new JFormattedTextField(formatoDinheiro);
+		campoValorParcela.setBounds(x, y+h, w, h);
+		
+		JLabel rotulo5 = new JLabel("Valor Total R$"); 
+		rotulo5.setBounds((x+=(w+20)), y, w, h);
+		//JFormattedTextField campoTaxaJuros = new JFormattedTextField(formatoDinheiro);
+		JLabel campoValorTotal = new JLabel("0.0"); 
+		campoValorTotal.setBounds(x, y+h, w, h);
+		
+		JLabel rotulo6 = new JLabel("Total de Juros R$"); 
+		rotulo6.setBounds((x+=(w+20)), y, w, h);
+		//JFormattedTextField campoParcelas = new JFormattedTextField(formatoDinheiro);
+		JLabel campoJurosTotais = new JLabel("0.0"); 
+		campoJurosTotais.setBounds(x, y+h, w, h);
+		
+		campoValorProduto.setValue(0.0);
+		campoTaxaJuros.setValue(0.0);
+		campoParcelas.setValue(0);
+		campoValorParcela.setValue(0.0);
+				
+		painelPrestações.setLayout(null); 
+		painelPrestações.add(rotulo1);
+		painelPrestações.add(campoValorProduto);
+		painelPrestações.add(rotulo2);
+		painelPrestações.add(campoTaxaJuros);
+		painelPrestações.add(rotulo3);
+		painelPrestações.add(campoParcelas);
+		painelPrestações.add(rotulo4);
+		painelPrestações.add(campoValorParcela);
+		painelPrestações.add(rotulo5);
+		painelPrestações.add(campoValorTotal);
+		painelPrestações.add(rotulo6);
+		painelPrestações.add(campoJurosTotais);
+
+		painelPrestações.setSize(500,500);
+
+		JButton botãoCalcular = new JButton("Calcular");
+		botãoCalcular.setBounds(x,(y+50),100,50);
+		botãoCalcular.addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						PagamentoFixo temp = new PagamentoFixo(
+								(Double) campoValorProduto.getValue(),
+								0.0,
+								0.0,
+								((Double) campoTaxaJuros.getValue())/100.0,
+								(Integer) campoParcelas.getValue(),
+								(Double) campoValorParcela.getValue()
+								);
+						temp.calcularZeros();
+						temp.calcularZeros();
+						
+						campoValorProduto.setValue(temp.getValorPresente());
+						campoTaxaJuros.setValue(temp.getTaxaJuros()*100.0);
+						
+						campoParcelas.setValue((new Double(temp.getNúmeroParcelas()).intValue()));
+						campoValorParcela.setValue(temp.getPagamentoPeriódico());
+						
+						campoValorTotal.setText(new Double(temp.getValorFuturo()).toString());
+						campoJurosTotais.setText(new Double(temp.getValorJuros()).toString());
+						
+						
+						//System.exit(0);
+					}
+				}
+		);
+		painelPrestações.add(botãoCalcular);
 	}
+	
 	private void preparaPainelAmortização() {
 		// TODO Auto-generated method stub
 		painelAmortização = new JPanel();
@@ -349,23 +433,25 @@ public class CalculadoraUI {
 		painelPrincipal = new JTabbedPane();
 		
 		painelPrincipal.addTab("Aposentadoria", null, painelAposentadoria,
-		                  "Does nothing");
+		                  "Calculadora simples de pagamento mensal para obter uma renda desejada"
+		                  + "depois em planos de previdência privada");
 		painelPrincipal.setMnemonicAt(0, KeyEvent.VK_1);
 
 		painelPrincipal.addTab("Prestações", null, painelPrestações,
-		                  "Does twice as much nothing");
+		                  "Calculadora de valor de prestações mensais para parcelar um produto"
+		                  + " qualquer considerando que são utilizados juros compostos ao mês");
 		painelPrincipal.setMnemonicAt(1, KeyEvent.VK_2);
 
 		painelPrincipal.addTab("Amortização", null, painelAmortização,
 		                  "Still does nothing");
 		painelPrincipal.setMnemonicAt(2, KeyEvent.VK_3);
 		
-		painelPrincipal.addTab("Juros Compostos", null, painelJurosSimples,
-                "Still does nothing");
+		painelPrincipal.addTab("Juros Simples", null, painelJurosSimples,
+                "Uma calculadora simples para cálculo de juros simples");
 		painelPrincipal.setMnemonicAt(2, KeyEvent.VK_4);
 
 		painelPrincipal.addTab("Juros Compostos", null, painelJurosCompostos,
-				"Still does nothing");
+				"Uma calculadora simples para cálculo de juros compostos");
 		painelPrincipal.setMnemonicAt(2, KeyEvent.VK_5);
 
 		JComponent panel4 = makeTextPanel(

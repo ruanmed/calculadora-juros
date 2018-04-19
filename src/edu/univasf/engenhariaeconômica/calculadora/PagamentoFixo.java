@@ -1,7 +1,7 @@
 package edu.univasf.engenhariaeconômica.calculadora;
 
 public class PagamentoFixo extends JurosCompostos {
-	double valorPagamentoPeriódico;	//PGTO
+	private double valorPagamentoPeriódico;	//PGTO
 	
 	
 	public PagamentoFixo(double VP, double VF, double J, double i, double n, double PGTO) {
@@ -15,10 +15,21 @@ public class PagamentoFixo extends JurosCompostos {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public PagamentoFixo(double VP, double VF, double J, double i, int n, double PGTO) {
+		super(VP, VF, J, i, n/1.0);
+		setPagamentoPeriódico(PGTO);
+		
+		calcularPagamentoPeriódico();
+		calcularValorPresente();
+		calcularValorFuturo();
+		
+		// TODO Auto-generated constructor stub
+	}
+	
 	void setPagamentoPeriódico(double novoValorPagamentoPeriódico) {
 		valorPagamentoPeriódico = novoValorPagamentoPeriódico;
 	}
-	double getPagamentoPeriódico() {
+	public double getPagamentoPeriódico() {
 		return valorPagamentoPeriódico;
 	}
 	
@@ -44,10 +55,13 @@ public class PagamentoFixo extends JurosCompostos {
 			setPagamentoPeriódico(novoPagamentoPeriódico);
 		}
 	}
-	
+	public void calcularZeros() {
+		super.calcularZeros();
+		calcularPagamentoPeriódico();
+	}
 	public void calcularValorPresente() {	// VP = PGTO/ [ i*(1+i)^n /  ( (1+i)^n - 1) ]
 		// TODO Auto-generated method stub
-		//super.calcularValorPresente();
+		super.calcularValorPresente();
 		if (getValorPresente() <= 0) {
 			double novoValorPresente = 0;
 			if (getTaxaJuros() > 0 && getNúmeroParcelas() > 0 && getPagamentoPeriódico() > 0) {	// VP = PGTO/ [ i*(1+i)^n /  ( (1+i)^n - 1) ]
@@ -77,6 +91,7 @@ public class PagamentoFixo extends JurosCompostos {
 	}
 	
 	public void calcularTaxaJuros() { 	// VF = PGTO*(((1+i)^n - 1)/i)
+		// VF/PGTO = ((1+i)^n - 1)/i
 		super.calcularTaxaJuros();
 		if (getTaxaJuros() <= 0) {
 			double novaTaxaJuros = 0;
