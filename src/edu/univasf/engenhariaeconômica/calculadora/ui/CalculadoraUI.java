@@ -17,6 +17,8 @@ public class CalculadoraUI {
 	private JLabel rotuloCabecalho;
 	private JLabel rotuloEstado;
 	private JTabbedPane painelPrincipal;
+
+	final JMenuBar menuBar ;
 	
 	private JPanel painelAposentadoria;
 	private JPanel painelPrestações;
@@ -25,6 +27,7 @@ public class CalculadoraUI {
 	private JPanel painelJurosCompostos;
 
 	public CalculadoraUI() {
+		menuBar = new JMenuBar();
 		// TODO Auto-generated constructor stub
 	}
 	public static void main(String[] args) {
@@ -35,7 +38,7 @@ public class CalculadoraUI {
 		preparaJanela();
 		preparaPainelAposentadoria();
 		preparaPainelPrestações();
-		preparaPainelOrçamentoCapital();
+		//preparaPainelOrçamentoCapital();
 		//preparaPainelAmortização();
 		//preparaPainelJurosSimples();
 		//preparaPainelJurosCompostos();
@@ -52,7 +55,7 @@ public class CalculadoraUI {
 	private void preparaMenu() {
 		// TODO Auto-generated method stub
 		//create a menu bar
-		final JMenuBar menuBar = new JMenuBar();
+		//menuBar = new JMenuBar();
 
 		//create menus
 		//JMenu menuSelecionar = new JMenu("Selecionar Calculadora");
@@ -442,10 +445,11 @@ public class CalculadoraUI {
 		                  "Calculadora de valor de prestações mensais para parcelar um produto"
 		                  + " qualquer considerando que são utilizados juros compostos ao mês");
 		painelPrincipal.setMnemonicAt(1, KeyEvent.VK_2);
-
+/*
 		painelPrincipal.addTab("Amortização", null, painelAmortização,
 		                  "Still does nothing");
 		painelPrincipal.setMnemonicAt(2, KeyEvent.VK_3);
+		
 		
 		painelPrincipal.addTab("Juros Simples", null, painelJurosSimples,
                 "Uma calculadora simples para cálculo de juros simples");
@@ -454,7 +458,7 @@ public class CalculadoraUI {
 		painelPrincipal.addTab("Juros Compostos", null, painelJurosCompostos,
 				"Uma calculadora simples para cálculo de juros compostos");
 		painelPrincipal.setMnemonicAt(2, KeyEvent.VK_5);
-
+		*/
 		JComponent panel4 = makeTextPanel(
 		        "Panel #4 (has a preferred size of 410 x 50).");
 		panel4.setPreferredSize(new Dimension(410, 50));
