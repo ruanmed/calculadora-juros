@@ -35,13 +35,14 @@ public class CalculadoraUI {
 		preparaJanela();
 		preparaPainelAposentadoria();
 		preparaPainelPrestações();
-		preparaPainelAmortização();
-		preparaPainelJurosSimples();
-		preparaPainelJurosCompostos();
+		preparaPainelOrçamentoCapital();
+		//preparaPainelAmortização();
+		//preparaPainelJurosSimples();
+		//preparaPainelJurosCompostos();
 		
 		preparaPainelPrincipal();
-		preparaBotaoCarregar();
-		preparaBotaoSair();
+		//preparaBotaoCarregar();
+		//preparaBotaoSair();
 		preparaMenu();
 		mostraJanela();
 
